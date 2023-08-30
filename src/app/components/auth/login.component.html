@@ -1,0 +1,31 @@
+<div class="container">
+
+<h1 class="pb-4"> Login </h1>
+
+<form [formGroup]="form">
+    <!-- Email input: for test purpose passing set  email already -->
+    <div class="form-outline mb-4 w-50">
+      <input type="email" id="txtEmail" class="form-control" [formControl]="controls.email"
+      value="david@learningvault.com.au" />
+      <label class="form-label" for="txtEmail">Email address</label>
+    </div>
+  
+    <!-- Password input - for testing passing set password already -->
+    <div class="form-outline mb-4 w-50">
+      <input type="password" id="txtPw" class="form-control" [formControl]="controls.password"
+      value="123456" />
+      <label class="form-label" for="txtPw">Password</label>
+    </div>
+  
+    <!-- Submit button -->
+    <div class="d-flex justify-content-between">
+      <button type="button" class="btn btn-primary btn-block" (click)="signin()">Sign in</button>
+      <a routerLink="/home"> Home </a>
+    </div>
+  </form>
+
+  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show w-50 mt-4" role="alert">
+    User name of password is not correct.
+  </div>
+
+</div>
