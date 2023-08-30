@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Book } from '../models/book';
 import { CreateBookRequest } from '../models/create-book-request';
 
@@ -13,8 +12,22 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks = (search?: string, page?: number) => 
-    this.http.get<Book[]>(`${this.apiUrl}/list/${search}/${page}`);
+  getBooks(search?: string | null, pageNumber?: number | null) {
+
+    // build query params for the api route
+    let queryParams = '';
+    if (search !== undefined) {
+      queryParams = `search=${search}`
+    }
+
+    if (pageNumber !== undefined) {
+      queryParams === ''
+        ? queryParams = `pageNumber=${pageNumber}`
+        : queryParams += `&pageNumber=${pageNumber}`
+    }
+    
+    return this.http.get<Book[]>(`${this.apiUrl}/list?${queryParams}`);
+  }
 
   create = (payload: CreateBookRequest) =>
     this.http.post(this.apiUrl, payload);

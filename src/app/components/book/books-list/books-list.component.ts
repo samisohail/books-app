@@ -16,7 +16,13 @@ export class BooksListComponent implements OnInit, OnDestroy {
   constructor(private bookService: BookService) { }
   
   ngOnInit(): void {
-    this.bookService.getBooks()
+    
+    // search and pagination could be implemented by passing params
+    // API is has all the search and paging functionality ready
+    // example: this.bookService.getBooks('Learning', 1);
+
+    // this.bookService.getBooks()
+    this.bookService.getBooks(undefined, 1)
     .pipe(
       takeWhile(() => this.componentActive)
    ).subscribe({ 
