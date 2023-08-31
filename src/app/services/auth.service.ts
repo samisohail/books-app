@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginRequest } from '../models/login-request';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { map } from 'rxjs';
 import { User } from '../models/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,14 @@ export class AuthService {
 
   public user?: User;
 
-  private readonly apiUrl = 'https://localhost:7098';
+  private readonly apiUrl: string;
   
   constructor(private http: HttpClient) {
+    this.apiUrl = `${environment.apiUrl}/user`;
   }
 
   login = (payload: LoginRequest) => 
-    this.http.post<User>(`${this.apiUrl}/user/login`, payload)
+    this.http.post<User>(`${this.apiUrl}/login`, payload)
     .pipe(map(user => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem('token', user.token);

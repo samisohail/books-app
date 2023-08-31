@@ -22,7 +22,7 @@ export class BooksListComponent implements OnInit, OnDestroy {
     // example: this.bookService.getBooks('Learning', 1);
 
     // this.bookService.getBooks()
-    this.bookService.getBooks(undefined, 1)
+    this.bookService.getBooks()
     .pipe(
       takeWhile(() => this.componentActive)
    ).subscribe({ 
